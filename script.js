@@ -16,21 +16,39 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// ── Typewriter effect on heading ──
+// ── Staggered entrance animations ──
+const contentItems = Array.from(document.querySelectorAll('.content > *'));
+const TITLE_INDEX = contentItems.findIndex(el => el.classList.contains('title'));
+
+contentItems.forEach(el => el.classList.add('reveal'));
+
+const staggerDelay = 300; // ms between each element
+
+contentItems.forEach((el, i) => {
+  setTimeout(() => {
+    el.classList.add('visible');
+  }, i * staggerDelay);
+});
+
+// ── Typewriter effect on heading (starts when title is revealed) ──
 const titleEl = document.querySelector('.title');
 const fullText = titleEl.textContent.trim();
 titleEl.textContent = '';
 titleEl.classList.add('typing');
 
-let charIndex = 0;
-const typeInterval = setInterval(() => {
-  titleEl.textContent = fullText.slice(0, ++charIndex);
-  if (charIndex >= fullText.length) {
-    clearInterval(typeInterval);
-    titleEl.classList.remove('typing');
-    titleEl.classList.add('typed');
-  }
-}, 80);
+const typewriterStart = TITLE_INDEX * staggerDelay + 50;
+
+setTimeout(() => {
+  let charIndex = 0;
+  const typeInterval = setInterval(() => {
+    titleEl.textContent = fullText.slice(0, ++charIndex);
+    if (charIndex >= fullText.length) {
+      clearInterval(typeInterval);
+      titleEl.classList.remove('typing');
+      titleEl.classList.add('typed');
+    }
+  }, 80);
+}, typewriterStart);
 
 // ── Floating hearts ──
 const heartsContainer = document.querySelector('.hearts-container');

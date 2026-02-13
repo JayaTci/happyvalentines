@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -29,6 +33,18 @@ body {
   z-index: -1;
 }
 
+/* ── Staggered reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Centered content ── */
 .content {
   display: flex;
@@ -39,7 +55,6 @@ body {
   gap: 2rem;
   padding: 3rem 2rem;
   text-align: center;
-  animation: fadeIn 2s ease forwards;
 }
 
 /* ── Date ── */
@@ -82,7 +97,6 @@ body {
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(4px);
   border-radius: 0 8px 8px 0;
-  animation: fadeIn 3s ease forwards;
 }
 
 .quote p {
@@ -173,7 +187,6 @@ body {
   border-bottom: 1px solid rgba(255, 160, 190, 0.4);
   border-radius: 0;
   padding: 1rem 2rem;
-  animation-delay: 0.5s;
 }
 
 /* ── Music toggle button ── */
@@ -220,6 +233,19 @@ body {
 @keyframes glow {
   from { text-shadow: 0 0 20px rgba(255, 120, 160, 0.8), 0 0 60px rgba(255, 80, 120, 0.4), 2px 2px 4px rgba(0,0,0,0.6); }
   to   { text-shadow: 0 0 30px rgba(255, 160, 190, 1),   0 0 90px rgba(255, 100, 150, 0.7), 2px 2px 4px rgba(0,0,0,0.6); }
+}
+
+/* ── Pulsing heart in dedication ── */
+.pulse-heart {
+  display: inline-block;
+  color: #ff6b9d;
+  animation: pulse 1.5s ease-in-out infinite;
+  margin-right: 0.3rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   color: #ff6b9d; }
+  50%       { transform: scale(1.35); color: #ff3370; }
 }
 
 @keyframes floatUp {
