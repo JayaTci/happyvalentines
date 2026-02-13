@@ -6,8 +6,8 @@
 
 body {
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100dvh;
+  overflow-x: hidden;
   font-family: 'Lora', serif;
 }
 
@@ -35,11 +35,20 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100dvh;
   gap: 2rem;
-  padding: 2rem;
+  padding: 3rem 2rem;
   text-align: center;
   animation: fadeIn 2s ease forwards;
+}
+
+/* ── Date ── */
+.date {
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 180, 210, 0.8);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* ── Main heading ── */
@@ -82,6 +91,65 @@ body {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
+/* ── Floating hearts ── */
+.hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  bottom: -2rem;
+  color: rgba(255, 120, 160, 0.75);
+  animation: floatUp linear forwards;
+  user-select: none;
+}
+
+/* ── Dedication ── */
+.dedication {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  color: rgba(255, 200, 220, 0.9);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  margin-top: 0.5rem;
+}
+
+/* ── Second quote — centered, no left border ── */
+.second-quote {
+  border-left: none;
+  border-top: 1px solid rgba(255, 160, 190, 0.4);
+  border-bottom: 1px solid rgba(255, 160, 190, 0.4);
+  border-radius: 0;
+  padding: 1rem 2rem;
+  animation-delay: 0.5s;
+}
+
+/* ── Music toggle button ── */
+.music-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 160, 190, 0.5);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.3rem;
+  color: #ffb3cc;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.1);
+}
+
 /* ── Animations ── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(16px); }
@@ -91,4 +159,63 @@ body {
 @keyframes glow {
   from { text-shadow: 0 0 20px rgba(255, 120, 160, 0.8), 0 0 60px rgba(255, 80, 120, 0.4), 2px 2px 4px rgba(0,0,0,0.6); }
   to   { text-shadow: 0 0 30px rgba(255, 160, 190, 1),   0 0 90px rgba(255, 100, 150, 0.7), 2px 2px 4px rgba(0,0,0,0.6); }
+}
+
+@keyframes floatUp {
+  0%   { opacity: 0;   transform: translateY(0)     rotate(0deg); }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.6; }
+  100% { opacity: 0;   transform: translateY(-110vh) rotate(20deg); }
+}
+
+/* ── Responsive: tablet ── */
+@media (max-width: 768px) {
+  .content {
+    gap: 1.5rem;
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .quote,
+  .second-quote {
+    max-width: 90%;
+  }
+
+  .quote p {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  }
+}
+
+/* ── Responsive: mobile ── */
+@media (max-width: 480px) {
+  .content {
+    gap: 1.2rem;
+    padding: 5rem 1.2rem 2.5rem;
+  }
+
+  .quote {
+    padding: 0.8rem 1rem;
+  }
+
+  .second-quote {
+    padding: 0.8rem 1rem;
+  }
+
+  .music-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* ── Responsive: very small (360px and below) ── */
+@media (max-width: 360px) {
+  .title {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .content {
+    gap: 1rem;
+  }
 }
