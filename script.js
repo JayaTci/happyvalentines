@@ -1,10 +1,6 @@
 // ── Video playback fix ──
 const video = document.querySelector('.bg-video');
 
-video.addEventListener('pause', () => {
-  video.play().catch(() => {});
-});
-
 video.addEventListener('ended', () => {
   video.currentTime = 0;
   video.play().catch(() => {});
